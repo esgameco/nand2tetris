@@ -4,6 +4,7 @@ My code for the project-based course nand2tetris.
 
 ## Projects Completed
 
+\* = inefficient
 - [ ] 01 - Boolean Logic Gates
     - [x] Not
     - [x] And
@@ -16,8 +17,8 @@ My code for the project-based course nand2tetris.
     - [x] Or16
     - [x] Mux16
     - [x] Or8Way
-    - [ ] Mux4Way16
-    - [ ] Mux8Way16
+    - [x] Mux4Way16*
+    - [x] Mux8Way16
     - [ ] DMux4Way
     - [ ] DMux8Way
 - [ ] 02 - Boolean Arithmetic
