@@ -27,7 +27,7 @@ My code for the project-based course nand2tetris.
     - [x] Add16
     - [x] Inc16
     - [x] ALU
-- [ ] 03 - Sequential Logic
+- [x] 03 - Sequential Logic
     - [x] Bit
     - [x] Register
     - [x] Ram8
@@ -35,4 +35,4 @@ My code for the project-based course nand2tetris.
     - [x] Ram512
     - [x] Ram4K
     - [x] Ram16K
-    - [ ] PC
+    - [x] PC
