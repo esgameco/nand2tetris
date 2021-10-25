@@ -21,12 +21,12 @@ My code for the project-based course nand2tetris.
     - [x] Mux8Way16
     - [x] DMux4Way
     - [x] DMux8Way
-- [ ] 02 - Boolean Arithmetic
+- [x] 02 - Boolean Arithmetic
     - [x] HalfAdder
     - [x] FullAdder
     - [x] Add16
     - [x] Inc16
-    - [ ] ALU
+    - [x] ALU
 - [ ] 03 - Sequential Logic
     - [ ] DFF
     - [ ] Bit
