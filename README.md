@@ -25,7 +25,7 @@ My code for the project-based course nand2tetris.
     - [x] HalfAdder
     - [x] FullAdder
     - [x] Add16
-    - [ ] Inc16
+    - [x] Inc16
     - [ ] ALU
 - [ ] 03 - Sequential Logic
     - [ ] DFF
