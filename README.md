@@ -32,7 +32,7 @@ My code for the project-based course nand2tetris.
     - [x] Register
     - [x] Ram8
     - [x] Ram64
-    - [ ] Ram512
-    - [ ] Ram4K
-    - [ ] Ram16K
+    - [x] Ram512
+    - [x] Ram4K
+    - [x] Ram16K
     - [ ] PC
