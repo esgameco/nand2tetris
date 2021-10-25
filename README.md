@@ -30,8 +30,8 @@ My code for the project-based course nand2tetris.
 - [ ] 03 - Sequential Logic
     - [x] Bit
     - [x] Register
-    - [ ] Ram8
-    - [ ] Ram64
+    - [x] Ram8
+    - [x] Ram64
     - [ ] Ram512
     - [ ] Ram4K
     - [ ] Ram16K
