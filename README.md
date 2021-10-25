@@ -28,9 +28,8 @@ My code for the project-based course nand2tetris.
     - [x] Inc16
     - [x] ALU
 - [ ] 03 - Sequential Logic
-    - [ ] DFF
-    - [ ] Bit
-    - [ ] Register
+    - [x] Bit
+    - [x] Register
     - [ ] Ram8
     - [ ] Ram64
     - [ ] Ram512

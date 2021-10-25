@@ -14,5 +14,8 @@ CHIP Bit {
     OUT out;
 
     PARTS:
-    // Put your code here:
+    And(a=prevIn, b=true, out=out);           // Outputs the last loaded input
+    Mux(a=prevIn, b=in, sel=load, out=newIn); // Chooses whether to use the last loaded input
+                                              // or to use a new input based on the load
+    DFF(in=newIn, out=prevIn);
 }
