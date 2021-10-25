@@ -23,8 +23,8 @@ My code for the project-based course nand2tetris.
     - [x] DMux8Way
 - [ ] 02 - Boolean Arithmetic
     - [x] HalfAdder
-    - [ ] FullAdder
-    - [ ] Add16
+    - [x] FullAdder
+    - [x] Add16
     - [ ] Inc16
     - [ ] ALU
 - [ ] 03 - Sequential Logic
