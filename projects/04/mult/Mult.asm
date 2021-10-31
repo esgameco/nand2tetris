@@ -21,7 +21,7 @@
 // If mem[1] == 0, skip to end
 @R1
 D=M
-@R2
+@R2 // Initialize mem[2] to 0
 M=0
 @INF
 D;JEQ
@@ -39,7 +39,7 @@ D;JEQ
     @R1
     M=M-1
 
-    // Loop if @1 > 0
+    // Loop if mem[1] > 0
     D=M
     @LOOP
     D;JGT
