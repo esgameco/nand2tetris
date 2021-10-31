@@ -15,7 +15,7 @@
 // @1 -> value to set screen to
 
 (START)
-    @24576
+    @KBD
     D=M // Set data reg to keyboard input
 
     @R1
@@ -29,7 +29,7 @@
     M=0 // Set screen register to 0
 
     (KEYPRESSED)
-    @16384
+    @SCREEN
     D=A
     @R0
     M=D // Set Reg 0 to start address of screen
@@ -44,7 +44,7 @@
         @R0
         M=M+1 // Increment screen address
 
-        @24576
+        @KBD
         D=A
         @R0
         D=M-D
