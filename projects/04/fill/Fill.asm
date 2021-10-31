@@ -11,4 +11,46 @@
 // "white" in every pixel;
 // the screen should remain fully clear as long as no key is pressed.
 
-// Put your code here.
+// @0 -> current screen index
+// @1 -> value to set screen to
+
+(START)
+    @24576
+    D=M // Set data reg to keyboard input
+
+    @1
+    M=-1 // Set screen register to -1
+
+    @KEYPRESSED
+    D;JGT // If a key is pressed, skip turning it to 0
+
+    // Otherwise turn it to 0
+    @1
+    M=0 // Set screen register to 0
+
+    (KEYPRESSED)
+    @16384
+    D=A
+    @0
+    M=D // Set Reg 0 to start address of screen
+
+    (LOOP)
+        @1
+        D=M // Get 0 or -1 from reg 1
+        @0
+        A=M // Get current address
+        M=D // Set screen register to 0 or -1
+
+        @0
+        M=M+1 // Increment screen address
+
+        @24576
+        D=A
+        @0
+        D=M-D
+        @LOOP
+        D;JLT // Jump back to beginning of loop if not time to break out
+
+(END)
+    @START
+    0;JMP

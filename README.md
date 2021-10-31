@@ -36,3 +36,13 @@ My code for the project-based course nand2tetris.
     - [x] Ram4K
     - [x] Ram16K
     - [x] PC
+- [x] 04 - Machine Language
+    - [x] Fill.asm
+    - [x] Mult.asm
+- [ ] 05 - Sequential Logic
+    - [ ] Memory
+    - [ ] CPU
+    - [ ] Computer
+    - [ ] Add.hack
+    - [ ] Max.hack
+    - [ ] Rect.hack
