@@ -9,35 +9,34 @@
 // This program only needs to handle arguments that satisfy
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
-/**
-*   First attempt: Slow method
-*       Add R0 R1 times
-*
-*   Next attempt: Faster
-*       Add R0 + R0, floor(log2(R1)) times
-*       Add extra R0s after
-*       *Problem: Need to know when to stop the R0+R0s
-*/
+
+//  First attempt: Slow method
+//      Add R0 R1 times
+//
+//  Next attempt: Faster
+//      Go Bit by Bit in R1 and do R0 += R0 n times, where n = the nth bit from the right
+//     *Problem: Need to know when
+
 
 // If mem[1] == 0, skip to end
-@1
+@R1
 D=M
-@2 // Set mem[2] to 0 to initialize value
+@R2
 M=0
 @INF
 D;JEQ
 
 (LOOP)
     // D = mem[0]
-    @0
+    @R0
     D=M
 
     // mem[2] += D
-    @2
+    @R2
     M=M+D
 
     // mem[1]--
-    @1
+    @R1
     M=M-1
 
     // Loop if @1 > 0

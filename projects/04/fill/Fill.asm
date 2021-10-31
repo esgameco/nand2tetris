@@ -18,35 +18,35 @@
     @24576
     D=M // Set data reg to keyboard input
 
-    @1
+    @R1
     M=-1 // Set screen register to -1
 
     @KEYPRESSED
     D;JGT // If a key is pressed, skip turning it to 0
 
     // Otherwise turn it to 0
-    @1
+    @R1
     M=0 // Set screen register to 0
 
     (KEYPRESSED)
     @16384
     D=A
-    @0
+    @R0
     M=D // Set Reg 0 to start address of screen
 
     (LOOP)
-        @1
+        @R1
         D=M // Get 0 or -1 from reg 1
-        @0
+        @R0
         A=M // Get current address
         M=D // Set screen register to 0 or -1
 
-        @0
+        @R0
         M=M+1 // Increment screen address
 
         @24576
         D=A
-        @0
+        @R0
         D=M-D
         @LOOP
         D;JLT // Jump back to beginning of loop if not time to break out
