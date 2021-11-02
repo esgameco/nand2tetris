@@ -24,36 +24,36 @@
 //                             (16^2)          2*(16^2)
 
 
-// If mem[1] == 0, skip to end
-@R1
-D=M
-@R2 // Initialize mem[2] to 0
-M=0
-@INF
-D;JEQ
+// // If mem[1] == 0, skip to end
+// @R1
+// D=M
+// @R2 // Initialize mem[2] to 0
+// M=0
+// @INF
+// D;JEQ
 
-(LOOP)
-    // D = mem[0]
-    @R0
-    D=M
+// (LOOP)
+//     // D = mem[0]
+//     @R0
+//     D=M
 
-    // mem[2] += D
-    @R2
-    M=M+D
+//     // mem[2] += D
+//     @R2
+//     M=M+D
 
-    // mem[1]--
-    @R1
-    M=M-1
+//     // mem[1]--
+//     @R1
+//     M=M-1
 
-    // Loop if mem[1] > 0
-    D=M
-    @LOOP
-    D;JGT
+//     // Loop if mem[1] > 0
+//     D=M
+//     @LOOP
+//     D;JGT
 
-// Terminate in infinite loop
-(INF)
-@INF
-0;JMP
+// // Terminate in infinite loop
+// (INF)
+// @INF
+// 0;JMP
 
 
 
@@ -64,86 +64,93 @@ D;JEQ
 
 // Other Method Attempt
 
-// test Register -> R3
-// i Register -> R4
-// temp Register -> R5
-// j Register -> R6
+// test Register -> test
+// i Register -> i
+// temp Register -> temp
+// j Register -> j
 // test will have 1 bit with 1 and 0s for all other bits
 // i will go up linearly
 
-// @R3 // Initialize test = 1
-// M=1
-// @R4 // Initialize i = 0
-// M=0
+@test // Initialize test = 1
+M=1
+@i // Initialize i = 0
+M=0
+@R2
+M=0
 
-// (LOOP)
-//     @R3
-//     D=M // D = test
+(LOOP)
+    // i == 16 -> time to exit
+    @i
+    D=M
+    @16
+    D=D-A
+    @INF
+    D;JEQ
 
-//     // If R1 & test != 0, add R0^i
-//     @R1
-//     D=D&M
-//     @SKIPADD
-//     D;JEQ // Skip add
+    // Skip add if test is true
+    @test
+    D=M
+    @R1
+    D=D&M // D = 0 if not in R1
+    @SKIPADD // Skip if D == 0
+    D;JEQ
 
-//     // temp = R0
-//     @R0
-//     D=M
-//     @R5
-//     M=D
+    // temp = R0
+    @R0
+    D=M
+    @temp
+    M=D
     
-//     // j = i
-//     @R4
-//     D=M
-//     @R6
-//     M=D
+    // j = i
+    @i
+    D=M
+    @j
+    M=D
 
-//     // Skip add loop if i <= 1
-//     @R4
-//     D=M
-//     @DOADD
-//     D-1;JLE
+    // Add Loop
+    (ADDLOOP)
+        // Exit if j == 0
+        @j
+        D=M
+        @DOADD
+        D;JEQ
 
-//     // Add Loop
-//     (ADDLOOP)
-//         // temp ^= 2
-//         @5
-//         D=M
-//         D=D+D
-//         M=D
+        // temp ^= 2
+        @temp
+        D=M
+        D=D+M
+        M=D
 
-//         // j--
-//         @6
-//         M=M-1
-//         D=M
+        // j--
+        @j
+        M=M-1
+        D=M
 
-//         // Loop until 
-//         @ADDLOOP
-//         D;JNE
+        // Go back to beginning
+        @ADDLOOP
+        0;JMP
 
-//     // Add to total (R2)
-//     (DOADD)
-//     @5
-//     D=M
-//     @2
-//     M=D
+    // Add to total (R2)
+    (DOADD)
+    @temp
+    D=M
+    @R2
+    M=M+D
 
-//     // test++ (check whether M+M works)
-//     (SKIPADD)
-//     @R3
-//     D=M
-//     D=D+D
-//     M=D
+    // test++
+    (SKIPADD)
+    @test
+    D=M
+    D=D+M
+    M=D
 
-//     // i++
-//     @R4
-//     M=M+1
+    // i++
+    @i
+    M=M+1
 
-//     // i == 16 -> time to exit
-//     D=M
-//     @16
-//     D-A;JNE
+    @LOOP
+    0;JMP
 
-// (INF)
-// @INF
-// 0;JMP
+(INF)
+@INF
+0;JMP
