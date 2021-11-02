@@ -10,18 +10,16 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 
-//  This Method: Faster for lower max values
+//  This Method: Slower always
 //      Add R0 R1 times
 //      This method has a min O(0) and max of O(32768)
 //      If the lower number becomes R1 and the higher R0,
-//      The max would be O(182), which is faster than the other method on average.
-//                        (sqrt(int_max))
+//      The max would be O(182), which is slower
 //
-//  Other Method: Faster for higher max values
+//  Other Method: Faster always
 //      Go Bit by Bit in R1 and do R0 += R0 n times, where n = the nth bit from the right
-//      Do this by 
-//      This method has a min O(128) and max of O(256)
-//                             (16^2)          2*(16^2)
+//      This method has a min O(16) and max of O(144)
+//                             (16)          16+(16^2)/2
 
 
 // // If mem[1] == 0, skip to end
@@ -75,7 +73,7 @@
 M=1
 @i // Initialize i = 0
 M=0
-@R2
+@R2 // Initialize R2 = 0
 M=0
 
 (LOOP)
