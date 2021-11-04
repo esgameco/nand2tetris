@@ -27,5 +27,14 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    DMux(in=load, sel=address[14], a=doRAM, b=doIO); 
+
+    RAM16K(in=in, load=doRAM, address=address[0..13], out=ramOut); // Data memory
+    Screen(in=in, load=doIO, address=address[0..12], out=screenOut); // Screen memory
+    Keyboard(out=kbdOut); // Keyboard data
+
+    Mux16(a=ramOut, b=screenOut, sel=address[14], out=ramOrScreen); // Outputs either ram or screen
+
+    And(a=address[13], b=address[14], out=doKbd); // If addr[14] and addr[15], kbd is active
+    Mux16(a=ramOrScreen, b=kbdOut, sel=doKbd, out=out); // Outputs either ram or screen or kbd
 }

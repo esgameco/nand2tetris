@@ -39,5 +39,7 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    // Needs ALU, A and D, PC
+    Register(in=instruction[0..14], load=instruction[15], out=A); // A register
+    ALU(x=
 }

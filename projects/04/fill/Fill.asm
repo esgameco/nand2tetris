@@ -18,35 +18,35 @@
     @KBD
     D=M // Set data reg to keyboard input
 
-    @R1
+    @state
     M=-1 // Set screen register to -1
 
     @KEYPRESSED
     D;JGT // If a key is pressed, skip turning it to 0
 
     // Otherwise turn it to 0
-    @R1
+    @state
     M=0 // Set screen register to 0
 
     (KEYPRESSED)
     @SCREEN
     D=A
-    @R0
+    @i
     M=D // Set Reg 0 to start address of screen
 
     (LOOP)
-        @R1
+        @state
         D=M // Get 0 or -1 from reg 1
-        @R0
+        @i
         A=M // Get current address
         M=D // Set screen register to 0 or -1
 
-        @R0
+        @i
         M=M+1 // Increment screen address
 
         @KBD
         D=A
-        @R0
+        @i
         D=M-D
         @LOOP
         D;JLT // Jump back to beginning of loop if not time to break out

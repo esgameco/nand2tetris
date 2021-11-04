@@ -39,10 +39,7 @@ My code for the project-based course nand2tetris.
 - [x] 04 - Machine Language
     - [x] Fill.asm
     - [x] Mult.asm
-- [ ] 05 - Sequential Logic
-    - [ ] Memory
+- [ ] 05 - Computer Architecture
+    - [x] Memory
     - [ ] CPU
     - [ ] Computer
-    - [ ] Add.hack
-    - [ ] Max.hack
-    - [ ] Rect.hack
