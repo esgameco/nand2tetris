@@ -39,27 +39,38 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Needs ALU, A and D, PC
-    Mux16(a=D, b=A, sel=instruction[12], out=inX); // x = D or A
-    Mux16(a=D, b=inM, sel=instruction[12], out=inY); // y = D or M
-    ALU(x=inX, y=inY, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, zr=isZero, ng=notGreater);
-    Not(in=notGreater, out=isGreater);
+    // Used everywhere
+    Not(in=instruction[15], out=aIns);
 
-    DRegister(in=aluOut, load=instruction[4], out=D); // D register
+    // ALU
+    Mux16(a=A, b=inM, sel=instruction[12], out=inY); // y = A or M
+    ALU(x=D, y=inY, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=aluOut, out=outM, zr=isZero, ng=notGreater);
+    Not(in=notGreater, out=notNotGreater);
+    Not(in=isZero, out=notZero);
+    And(a=notNotGreater, b=notZero, out=isGreater);
 
-    Mux16(a=aluOut, b=instruction, sel=instruction[15], out=toA); // instruction or alu output -> A register
-    Or(a=instruction[15], b=instruction[5], out=loadA); // Loads A if A instruction or ALU bit
-    ARegister(in=toA, load=loadA, out=A); // A register
+    // D Register
+    And(a=instruction[15], b=instruction[4], out=loadD);
+    DRegister(in=aluOut, load=loadD, out=D); // D register
 
-    And(a=instruction[3], b=notGreater, out=firstPC);
-    And(a=instruction[4], b=isZero, out=secondPC);
-    And(a=instruction[5], b=isGreater, out=thirdPC);
+    // A Register
+    Mux16(a=aluOut, b=instruction, sel=aIns, out=toA); // Instruction or ALU Output -> A register
+    Or(a=aIns, b=instruction[5], out=loadA); // Loads A if A instruction or ALU bit
+    ARegister(in=toA, load=loadA, out=A, out[0..14]=addressM); // A register
+
+    // PC
+    And(a=instruction[2], b=notGreater, out=firstPC);
+    And(a=instruction[1], b=isZero, out=secondPC);
+    And(a=instruction[0], b=isGreater, out=thirdPC);
     Or(a=firstPC, b=secondPC, out=fOrS);
-    Or(a=fOrS, b=thirdPC, out=doPCLoad);
-    Not(in=instruction[15], out=notAIns);
-    And(a=doPCLoad, b=notAIns, out=doInc);    
+    Or(a=fOrS, b=thirdPC, out=doJmp);
+    
+    And(a=doJmp, b=instruction[15], out=doPCLoad);
+    Not(in=doPCLoad, out=notDoPCLoad);
+    Or(a=aIns, b=notDoPCLoad, out=doInc); // Increment if A instruction or not loading PC
 
-    PC(in=A, load=doPCLoad, inc=notAIns, reset=reset, out[0..14]=pc);
+    PC(in=A, load=doPCLoad, inc=doInc, reset=reset, out[0..14]=pc);
 
-    And(a=instruction[12], b=notAIns, out=writeM); // Write to M if C inst specifies, and is not A inst
+    // M
+    And(a=instruction[3], b=instruction[15], out=writeM); // Write to M if C inst specifies, and is not A inst
 }

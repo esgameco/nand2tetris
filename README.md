@@ -39,7 +39,7 @@ My code for the project-based course nand2tetris.
 - [x] 04 - Machine Language
     - [x] Fill.asm
     - [x] Mult.asm
-- [ ] 05 - Computer Architecture
+- [x] 05 - Computer Architecture
     - [x] Memory
-    - [ ] CPU
-    - [ ] Computer
+    - [x] CPU
+    - [x] Computer
