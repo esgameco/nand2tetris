@@ -41,5 +41,5 @@ My code for the project-based course nand2tetris.
     - [x] Mult.asm
 - [x] 05 - Computer Architecture
     - [x] Memory
-    - [x] CPU
+    - [x] CPU*
     - [x] Computer
